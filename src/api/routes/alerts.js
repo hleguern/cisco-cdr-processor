@@ -286,7 +286,8 @@ async function evaluateRule(pool, rule) {
               AND datetimeorigination < now() - interval '${interval}'
           ) AS prior_count
         FROM cdr
-        WHERE true ${scopeClause}
+        WHERE datetimeorigination >= now() - interval '${interval}' * 2
+          ${scopeClause}
       `,
       params,
     );
